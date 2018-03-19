@@ -1,5 +1,6 @@
 // Michael Lam
 // March 13, 2018
+// Last updated March 18, 2018
 // Colourful circles drawn diagonally.
 
 float a = 0; // Moves circles horizontally
@@ -26,5 +27,3 @@ void draw() {
     a += 2; // Increases the x position of circles to the right
   }
 }
-
-// Code is probably garbage but it's 1AM.

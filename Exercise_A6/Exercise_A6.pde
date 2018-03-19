@@ -1,6 +1,6 @@
 // Michael Lam
 // March 13, 2018
-// Last updated March 14, 2018.
+// Last updated March 18, 2018.
 // Beautiful circles that follow the mouse.
 
 float x;
@@ -14,10 +14,10 @@ void setup() {
 }
 
 void draw() {
-  x = 0;
+  x = 0; // Resets x coordinate at each loop.
   while (x < width) {
     x += 16; // Draws circles 20px horizontally apart from each other.
-    y = 0;
+    y = 0; // Resets y coordinate at each loop.
     while (y < height) {
       y += 16; // Draws circles 20px vertically apart from each other.
       if (x < mouseX && y < mouseY) {
@@ -32,7 +32,5 @@ void draw() {
 }
 
 /* Issues
-- Colour pattern does not match.
-- x and y for some reason need to be set before each while; changing its value
-  changes where the circles begin to draw.
+- Colour pattern does not match. Adding max values to colorMode affects program.
 */
