@@ -1,5 +1,5 @@
-# Processing Exercises
-## Set A
+# Processing
+## Set A Exercises
 ### Exercise 1
 ![Exercise A1](https://i.imgur.com/49Ejsa5.png)
 ### Exercise 2
