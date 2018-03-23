@@ -17,14 +17,12 @@ int selectedQuestion;
 int operator;
 int randNum1;
 int randNum2;
-int randHighNum1;
-int randLowNum2;
+int divNum;
 String userInput = "";
 String operatorText;
 String randNumText1;
 String randNumText2;
-String randHighNumText1;
-String randLowNumText1;
+String divNumText;
 
 // Initial setup
 void setup() {
@@ -43,7 +41,7 @@ void btnSetup() {
   multiplicationBtn = new IFButton ("Multiplication", 190, 20, 80, 17);
   divisionBtn = new IFButton ("Division", 270, 20, 80, 17);
   resetBtn = new IFButton ("Reset", 350, 20, 80, 17);
-
+  
   additionBtn.addActionListener(this);
   subtractionBtn.addActionListener(this);
   multiplicationBtn.addActionListener(this);
@@ -84,6 +82,10 @@ void actionPerformed (GUIEvent e) {
     selectedQuestion = 4;
   } else if (e.getSource() == resetBtn) {
     newMathQuestion();
+    score = 0;
+    userCorrect = 0;
+    userIncorrect = 0;
+    userInput = "";
   }
 }
 
@@ -109,7 +111,7 @@ void subtractionQuestion() {
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, 100, 500);
   userAnswer = int(userInput);
   operator = 2;
-  text(randHighNumText1 + " - " + randLowNumText1 + " = " + userInput, 100, 100);
+  text(divNum + " - " + randNum2 + " = " + userInput, 100, 100);
 }
 
 void multiplicationQuestion() {
@@ -121,14 +123,13 @@ void multiplicationQuestion() {
   text(randNumText1 + " * " + randNumText2 + " = " + userInput, 100, 100);
 }
 
-// Fix: this currently does remainder.
 void divisionQuestion() {
   background(255);
   fill(0);
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, 100, 500);
   userAnswer = int(userInput);
   operator = 4;
-  text(randHighNumText1 + " % " + randLowNumText1 + " = " + userInput, 100, 100); // Broken
+  text(divNum + " ÷ " + randNum2 + " = " + userInput, 100, 100);
 }
 
 void keyPressed() {
@@ -147,6 +148,7 @@ void keyPressed() {
   }
 }
 
+// Add functionality to display correct answer, then change question
 void checkAnswer() {
   if (operator == 1) {
     if (userAnswer == randNum1 + randNum2) {
@@ -160,10 +162,13 @@ void checkAnswer() {
       }
       userIncorrect += 1;
       userInput = "";
+      // fill(0);
+      // text("Correct answer: " + (randNum1 + randNum2), 100, 300);
+      }
     }
   }
   if (operator == 2) {
-    if (userAnswer == randHighNum1 - randLowNum2) {
+    if (userAnswer == divNum - randNum2) {
       score += 10;
       userCorrect += 1;
       userInput = "";
@@ -191,7 +196,7 @@ void checkAnswer() {
     }
   }
   if (operator == 4) {
-    if (userAnswer == randHighNum1 % randLowNum2) {
+    if (userAnswer == divNum / randNum2) {
       score += 10;
       userCorrect += 1;
       userInput = "";
@@ -207,13 +212,10 @@ void checkAnswer() {
 }
 
 void newMathQuestion() {
-  randNum1 = (int) random(10);
-  randNum2 = (int) random(10);
-  randHighNum1 = (int) random(10, 20);
-  randLowNum2 = (int) random(10);
+  randNum1 = (int) random(1, 30);
+  randNum2 = (int) random(20);
   operatorText = str(operator);
   randNumText1 = str(randNum1);
   randNumText2 = str(randNum2);
-  randHighNumText1 = str(randHighNum1);
-  randLowNumText1 = str(randLowNum2);
+  divNum = randNum1 * randNum2;
 }
