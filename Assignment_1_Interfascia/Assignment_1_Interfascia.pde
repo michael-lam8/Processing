@@ -26,7 +26,7 @@ String randNumText2;
 String randHighNumText1;
 String randLowNumText1;
 
-// First run setup
+// Initial setup
 void setup() {
   size(600, 600);
   arialFont = createFont("Arial", 32, true);
@@ -34,14 +34,15 @@ void setup() {
   btnSetup();
 }
 
+// Interfascia button setup
 void btnSetup() {
   c = new GUIController (this);
 // Maybe add a main menu button
   additionBtn = new IFButton ("Addition", 30, 20, 80, 17);
-  subtractionBtn = new IFButton ("Subtraction", 30, 60, 80, 17);
-  multiplicationBtn = new IFButton ("Multiplication", 30, 100, 80, 17);
-  divisionBtn = new IFButton ("Division", 30, 140, 80, 17);
-  resetBtn = new IFButton ("Reset", 30, 180, 80, 17);
+  subtractionBtn = new IFButton ("Subtraction", 110, 20, 80, 17);
+  multiplicationBtn = new IFButton ("Multiplication", 190, 20, 80, 17);
+  divisionBtn = new IFButton ("Division", 270, 20, 80, 17);
+  resetBtn = new IFButton ("Reset", 350, 20, 80, 17);
 
   additionBtn.addActionListener(this);
   subtractionBtn.addActionListener(this);
