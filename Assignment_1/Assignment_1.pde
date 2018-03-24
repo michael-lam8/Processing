@@ -1,6 +1,12 @@
 // Michael Lam
 // March 2018
 
+// Importing Interfascia library
+import interfascia.*;
+GUIController c;
+IFButton additionBtn, subtractionBtn, multiplicationBtn, divisionBtn, resetBtn;
+
+// Declaring variables
 PFont arialFont;
 int score;
 int keystroke;
@@ -11,53 +17,75 @@ int selectedQuestion;
 int operator;
 int randNum1;
 int randNum2;
-int randHighNum1;
-int randLowNum2;
+int divNum;
 String userInput = "";
 String operatorText;
 String randNumText1;
 String randNumText2;
-String randHighNumText1;
-String randLowNumText1;
+String divNumText;
 
+// Initial setup
 void setup() {
   size(600, 600);
   arialFont = createFont("Arial", 32, true);
   newMathQuestion();
+  btnSetup();
+}
+
+// Interfascia button setup
+void btnSetup() {
+  c = new GUIController (this);
+// Maybe add a main menu button
+  additionBtn = new IFButton ("Addition", 30, 20, 80, 17);
+  subtractionBtn = new IFButton ("Subtraction", 110, 20, 80, 17);
+  multiplicationBtn = new IFButton ("Multiplication", 190, 20, 80, 17);
+  divisionBtn = new IFButton ("Division", 270, 20, 80, 17);
+  resetBtn = new IFButton ("Reset", 350, 20, 80, 17);
+  
+  additionBtn.addActionListener(this);
+  subtractionBtn.addActionListener(this);
+  multiplicationBtn.addActionListener(this);
+  divisionBtn.addActionListener(this);
+  resetBtn.addActionListener(this);
+  c.add (additionBtn);
+  c.add (subtractionBtn);
+  c.add (multiplicationBtn);
+  c.add (divisionBtn);
+  c.add (resetBtn);
 }
 
 void draw() {
   background(255);
   textFont(arialFont);
-  rect(100, 300, 100, 100);
-  fill(0);
-  text("+", 100, 100);
-  fill(255);
-  rect(200, 300, 100, 100);
-  rect(300, 300, 100, 100);
-  rect(400, 300, 100, 100);
-  rect(500, 300, 100, 100);
-  if (mousePressed) {
-   if (mouseX > 100 && mouseX < (100 + 100) && mouseY > 300 && mouseY < (300 + 100)) {
-     selectedQuestion = 1;
-   } else if (mouseX > 200 && mouseX < (200 + 100) && mouseY > 300 && mouseY < (300 + 100)) {
-     selectedQuestion = 2;
-   } else if (mouseX > 300 && mouseX < (300 + 100) && mouseY > 300 && mouseY < (300 + 100)) {
-     selectedQuestion = 3;
-   } else if (mouseX > 400 && mouseX < (400 + 100) && mouseY > 300 && mouseY < (300 + 100)) {
-     selectedQuestion = 4;
-   }
-  }
   if (selectedQuestion == 1) {
-   additionQuestion(); 
+    additionQuestion();
   } else if (selectedQuestion == 2) {
-   subtractionQuestion(); 
+    subtractionQuestion();
   } else if (selectedQuestion == 3) {
-   multiplicationQuestion(); 
+    multiplicationQuestion();
   } else if (selectedQuestion == 4) {
-   divisionQuestion(); 
-  } else if (selectedQuestion == 0) {
-   // Returns to draw() screen when Back button is clicked.
+    divisionQuestion();
+  } else if (selectedQuestion == 0) { // May remove
+    // Returns to draw() screen when Back button is clicked.
+  }
+}
+
+// Runs code when buttons are clicked
+void actionPerformed (GUIEvent e) {
+  if (e.getSource() == additionBtn) {
+    selectedQuestion = 1;
+  } else if (e.getSource() == subtractionBtn) {
+    selectedQuestion = 2;
+  } else if (e.getSource() == multiplicationBtn) {
+    selectedQuestion = 3;
+  } else if (e.getSource() == divisionBtn) {
+    selectedQuestion = 4;
+  } else if (e.getSource() == resetBtn) {
+    newMathQuestion();
+    score = 0;
+    userCorrect = 0;
+    userIncorrect = 0;
+    userInput = "";
   }
 }
 
@@ -71,9 +99,9 @@ void additionQuestion() {
   fill(255);
   rect(500, 500, 100, 100);
   if (mousePressed) {
-   if (mouseX > 500 && mouseX < (500 + 100) && mouseY > 500 && mouseY < (500 + 100)) {
-     selectedQuestion = 0;
-   }
+    if (mouseX > 500 && mouseX < (500 + 100) && mouseY > 500 && mouseY < (500 + 100)) {
+      selectedQuestion = 0;
+    }
   }
 }
 
@@ -83,7 +111,7 @@ void subtractionQuestion() {
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, 100, 500);
   userAnswer = int(userInput);
   operator = 2;
-  text(randHighNumText1 + " - " + randLowNumText1 + " = " + userInput, 100, 100);
+  text(divNum + " - " + randNum2 + " = " + userInput, 100, 100);
 }
 
 void multiplicationQuestion() {
@@ -101,47 +129,51 @@ void divisionQuestion() {
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, 100, 500);
   userAnswer = int(userInput);
   operator = 4;
-  text(randHighNumText1 + " % " + randLowNumText1 + " = " + userInput, 100, 100); // Broken
+  text(divNum + " ÷ " + randNum2 + " = " + userInput, 100, 100);
 }
 
 void keyPressed() {
- keystroke = int(key);
- keystroke = keystroke - 48;
- if(keystroke >= 0 && keystroke <= 9){
+  keystroke = int(key);
+  keystroke = keystroke - 48;
+  if (keystroke >= 0 && keystroke <= 9) {
     userInput += key;
   }
- if (key == BACKSPACE) {
+  if (key == BACKSPACE) {
     if (userInput.length()>0) { // Crashes when no text entered and backspaced
       userInput = userInput.substring(0, userInput.length()-2);
     }
- }
- if (key == RETURN || key == ENTER) {
+  }
+  if (key == RETURN || key == ENTER) {
     checkAnswer();
- }
+  }
 }
 
+// Add functionality to display correct answer, then change question
 void checkAnswer() {
- if (operator == 1) {
-   if (userAnswer == randNum1 + randNum2) {
-     score += 10;
-     userCorrect += 1;
-     userInput = "";
-     newMathQuestion();
-     } else {
+  if (operator == 1) {
+    if (userAnswer == randNum1 + randNum2) {
+      score += 10;
+      userCorrect += 1;
+      userInput = "";
+      newMathQuestion();
+    } else {
       if (score > 0) {
         score -= 10;
       }
       userIncorrect += 1;
       userInput = "";
+      // fill(0);
+      // text("Correct answer: " + (randNum1 + randNum2), 100, 300);
+      }
     }
   }
   if (operator == 2) {
-   if (userAnswer == randHighNum1 - randLowNum2) {
-     score += 10;
-     userCorrect += 1;
-     userInput = "";
-     newMathQuestion();
-     } else {
+    if (userAnswer == divNum - randNum2) {
+      score += 10;
+      userCorrect += 1;
+      userInput = "";
+      newMathQuestion();
+    } else {
       if (score > 0) {
         score -= 10;
       }
@@ -150,12 +182,12 @@ void checkAnswer() {
     }
   }
   if (operator == 3) {
-   if (userAnswer == randNum1 * randNum2) {
-     score += 10;
-     userCorrect += 1;
-     userInput = "";
-     newMathQuestion();
-     } else {
+    if (userAnswer == randNum1 * randNum2) {
+      score += 10;
+      userCorrect += 1;
+      userInput = "";
+      newMathQuestion();
+    } else {
       if (score > 0) {
         score -= 10;
       }
@@ -164,12 +196,12 @@ void checkAnswer() {
     }
   }
   if (operator == 4) {
-   if (userAnswer == randHighNum1 % randLowNum2) {
-     score += 10;
-     userCorrect += 1;
-     userInput = "";
-     newMathQuestion();
-     } else {
+    if (userAnswer == divNum / randNum2) {
+      score += 10;
+      userCorrect += 1;
+      userInput = "";
+      newMathQuestion();
+    } else {
       if (score > 0) {
         score -= 10;
       }
@@ -180,13 +212,10 @@ void checkAnswer() {
 }
 
 void newMathQuestion() {
-  randNum1 = (int) random(10);
-  randNum2 = (int) random(10);
-  randHighNum1 = (int) random(10, 20);
-  randLowNum2 = (int) random(10);
+  randNum1 = (int) random(1, 30);
+  randNum2 = (int) random(20);
   operatorText = str(operator);
   randNumText1 = str(randNum1);
   randNumText2 = str(randNum2);
-  randHighNumText1 = str(randHighNum1);
-  randLowNumText1 = str(randLowNum2);
+  divNum = randNum1 * randNum2;
 }
