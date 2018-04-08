@@ -41,7 +41,7 @@ void btnSetup() {
   multiplicationBtn = new IFButton ("Multiplication", 190, 20, 80, 17);
   divisionBtn = new IFButton ("Division", 270, 20, 80, 17);
   resetBtn = new IFButton ("Reset", 350, 20, 80, 17);
-  
+
   additionBtn.addActionListener(this);
   subtractionBtn.addActionListener(this);
   multiplicationBtn.addActionListener(this);
@@ -166,7 +166,6 @@ void checkAnswer() {
       // text("Correct answer: " + (randNum1 + randNum2), 100, 300);
       }
     }
-  }
   if (operator == 2) {
     if (userAnswer == divNum - randNum2) {
       score += 10;
