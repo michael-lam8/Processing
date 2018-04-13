@@ -4,25 +4,12 @@
 // Importing Interfascia library
 import interfascia.*;
 GUIController c;
-IFButton additionBtn, subtractionBtn, multiplicationBtn, divisionBtn, resetBtn;
+IFButton additionBtn, subtractionBtn, multiplicationBtn, divisionBtn, resetBtn, menuBtn;
 
 // Declaring variables
 PFont arialFont;
-int score;
-int keystroke;
-int userCorrect;
-int userIncorrect;
-int userAnswer;
-int selectedQuestion;
-int operator;
-int randNum1;
-int randNum2;
-int divNum;
-String userInput = "";
-String operatorText;
-String randNumText1;
-String randNumText2;
-String divNumText;
+int score, keystroke, userCorrect, userIncorrect, userAnswer, selectedQuestion, operator, randNum1, randNum2, divNum;
+String userInput = "", operatorText, randNumText1, randNumText2, divNumText;
 
 // Initial setup
 void setup() {
@@ -41,22 +28,31 @@ void btnSetup() {
   multiplicationBtn = new IFButton ("Multiplication", 190, 20, 80, 17);
   divisionBtn = new IFButton ("Division", 270, 20, 80, 17);
   resetBtn = new IFButton ("Reset", 350, 20, 80, 17);
+  menuBtn = new IFButton ("Main Menu", 430, 20, 80, 17);
 
   additionBtn.addActionListener(this);
   subtractionBtn.addActionListener(this);
   multiplicationBtn.addActionListener(this);
   divisionBtn.addActionListener(this);
   resetBtn.addActionListener(this);
+  menuBtn.addActionListener(this);
+  
   c.add (additionBtn);
   c.add (subtractionBtn);
   c.add (multiplicationBtn);
   c.add (divisionBtn);
   c.add (resetBtn);
+  c.add (menuBtn);
 }
 
+// Main menu
 void draw() {
   background(255);
   textFont(arialFont);
+  textAlign(CENTER, CENTER);
+  fill(0);
+  text("Welcome!", width/2, height/2-25);
+  text("Select a game mode above.", width/2, height/2+25);
   if (selectedQuestion == 1) {
     additionQuestion();
   } else if (selectedQuestion == 2) {
@@ -86,69 +82,72 @@ void actionPerformed (GUIEvent e) {
     userCorrect = 0;
     userIncorrect = 0;
     userInput = "";
+  } else if (e.getSource() == menuBtn) {
+    selectedQuestion = 0;
   }
 }
 
+// Addition game mode
 void additionQuestion() {
   background(255);
+  //textAlign(BASELINE);
   fill(0);
-  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, 100, 500);
+  //text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, 100, 500);
+  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
   userAnswer = int(userInput);
   operator = 1;
-  text(randNumText1 + " + " + randNumText2 + " = " + userInput, 100, 100);
-  fill(255);
-  rect(500, 500, 100, 100);
-  if (mousePressed) {
-    if (mouseX > 500 && mouseX < (500 + 100) && mouseY > 500 && mouseY < (500 + 100)) {
-      selectedQuestion = 0;
-    }
-  }
+  text(randNumText1 + " + " + randNumText2 + " = " + userInput, width/2, 100);
 }
 
+// Subtraction game mode
 void subtractionQuestion() {
   background(255);
   fill(0);
-  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, 100, 500);
+  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
   userAnswer = int(userInput);
   operator = 2;
-  text(divNum + " - " + randNum2 + " = " + userInput, 100, 100);
+  text(divNum + " - " + randNum2 + " = " + userInput, width/2, 100);
 }
 
+// Multiplication game mode
 void multiplicationQuestion() {
   background(255);
   fill(0);
-  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, 100, 500);
+  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
   userAnswer = int(userInput);
   operator = 3;
-  text(randNumText1 + " * " + randNumText2 + " = " + userInput, 100, 100);
+  text(randNumText1 + " * " + randNumText2 + " = " + userInput, width/2, 100);
 }
 
+// Division game mode
 void divisionQuestion() {
   background(255);
   fill(0);
-  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, 100, 500);
+  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
   userAnswer = int(userInput);
   operator = 4;
-  text(divNum + " ÷ " + randNum2 + " = " + userInput, 100, 100);
+  text(divNum + " ÷ " + randNum2 + " = " + userInput, width/2, 100);
 }
 
+// Allows for keyboard input
 void keyPressed() {
+  // Allows only for numbers to be inputted
   keystroke = int(key);
   keystroke = keystroke - 48;
   if (keystroke >= 0 && keystroke <= 9) {
     userInput += key;
   }
-  if (key == BACKSPACE) {
-    if (userInput.length()>0) { // Crashes when no text entered and backspaced
+  if (key == BACKSPACE) { // Deletes characters when backspace is pressed
+    if (userInput.length()>0) { // NOTE: Crashes when no text entered and backspaced
       userInput = userInput.substring(0, userInput.length()-2);
     }
   }
-  if (key == RETURN || key == ENTER) {
+  if (key == RETURN || key == ENTER) { // Checks answer when enter is pressed
     checkAnswer();
   }
 }
 
-// Add functionality to display correct answer, then change question
+// NOTE: Add functionality to display correct answer, then change question
 void checkAnswer() {
   if (operator == 1) {
     if (userAnswer == randNum1 + randNum2) {
@@ -210,6 +209,7 @@ void checkAnswer() {
   }
 }
 
+// Creates new integers
 void newMathQuestion() {
   randNum1 = (int) random(1, 30);
   randNum2 = (int) random(20);
