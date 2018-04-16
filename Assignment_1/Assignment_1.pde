@@ -22,7 +22,6 @@ void setup() {
 // Interfascia button setup
 void btnSetup() {
   c = new GUIController (this);
-// Maybe add a main menu button
   additionBtn = new IFButton ("Addition", 30, 20, 80, 17);
   subtractionBtn = new IFButton ("Subtraction", 110, 20, 80, 17);
   multiplicationBtn = new IFButton ("Multiplication", 190, 20, 80, 17);
@@ -47,12 +46,13 @@ void btnSetup() {
 
 // Main menu
 void draw() {
+  surface.setTitle("Assignment 1 - Main Menu"); // Sets window title
   background(255);
   textFont(arialFont);
   textAlign(CENTER, CENTER);
   fill(0);
-  text("Welcome!", width/2, height/2-25);
-  text("Select a game mode above.", width/2, height/2+25);
+  text("Welcome!", width/2, height/2-20);
+  text("Select a game mode above.", width/2, height/2+20);
   if (selectedQuestion == 1) {
     additionQuestion();
   } else if (selectedQuestion == 2) {
@@ -89,8 +89,8 @@ void actionPerformed (GUIEvent e) {
 
 // Addition game mode
 void additionQuestion() {
+  surface.setTitle("Assignment 1 - Addition");
   background(255);
-  //textAlign(BASELINE);
   fill(0);
   //text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, 100, 500);
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
@@ -101,6 +101,7 @@ void additionQuestion() {
 
 // Subtraction game mode
 void subtractionQuestion() {
+  surface.setTitle("Assignment 1 - Subtraction");
   background(255);
   fill(0);
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
@@ -111,6 +112,7 @@ void subtractionQuestion() {
 
 // Multiplication game mode
 void multiplicationQuestion() {
+  surface.setTitle("Assignment 1 - Multiplication");
   background(255);
   fill(0);
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
@@ -121,6 +123,7 @@ void multiplicationQuestion() {
 
 // Division game mode
 void divisionQuestion() {
+  surface.setTitle("Assignment 1 - Division");
   background(255);
   fill(0);
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
