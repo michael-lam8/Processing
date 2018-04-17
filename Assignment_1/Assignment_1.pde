@@ -1,10 +1,10 @@
 // Michael Lam
-// March 2018
+// April 2018
 
 // Importing Interfascia library
 import interfascia.*;
 GUIController c;
-IFButton additionBtn, subtractionBtn, multiplicationBtn, divisionBtn, resetBtn, menuBtn;
+IFButton additionBtn, subtractionBtn, multiplicationBtn, divisionBtn, resetBtn, menuBtn, pongBtn;
 
 // Declaring variables
 PFont arialFont;
@@ -28,6 +28,7 @@ void btnSetup() {
   divisionBtn = new IFButton ("Division", 270, 20, 80, 17);
   resetBtn = new IFButton ("Reset", 350, 20, 80, 17);
   menuBtn = new IFButton ("Main Menu", 430, 20, 80, 17);
+  pongBtn = new IFButton ("Pong", 510, 20, 80, 17);
 
   additionBtn.addActionListener(this);
   subtractionBtn.addActionListener(this);
@@ -35,6 +36,7 @@ void btnSetup() {
   divisionBtn.addActionListener(this);
   resetBtn.addActionListener(this);
   menuBtn.addActionListener(this);
+  pongBtn.addActionListener(this);
   
   c.add (additionBtn);
   c.add (subtractionBtn);
@@ -42,6 +44,7 @@ void btnSetup() {
   c.add (divisionBtn);
   c.add (resetBtn);
   c.add (menuBtn);
+  c.add (pongBtn);
 }
 
 // Main menu
@@ -61,6 +64,8 @@ void draw() {
     multiplicationQuestion();
   } else if (selectedQuestion == 4) {
     divisionQuestion();
+  } else if (selectedQuestion == 5) {
+    runPong();
   } else if (selectedQuestion == 0) { // May remove
     // Returns to draw() screen when Back button is clicked.
   }
@@ -82,6 +87,8 @@ void actionPerformed (GUIEvent e) {
     userCorrect = 0;
     userIncorrect = 0;
     userInput = "";
+  } else if (e.getSource() == pongBtn) {
+    selectedQuestion = 5;
   } else if (e.getSource() == menuBtn) {
     selectedQuestion = 0;
   }
@@ -91,8 +98,6 @@ void actionPerformed (GUIEvent e) {
 void additionQuestion() {
   surface.setTitle("Assignment 1 - Addition");
   background(255);
-  fill(0);
-  //text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, 100, 500);
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
   userAnswer = int(userInput);
   operator = 1;
@@ -103,7 +108,6 @@ void additionQuestion() {
 void subtractionQuestion() {
   surface.setTitle("Assignment 1 - Subtraction");
   background(255);
-  fill(0);
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
   userAnswer = int(userInput);
   operator = 2;
@@ -114,7 +118,6 @@ void subtractionQuestion() {
 void multiplicationQuestion() {
   surface.setTitle("Assignment 1 - Multiplication");
   background(255);
-  fill(0);
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
   userAnswer = int(userInput);
   operator = 3;
@@ -125,13 +128,19 @@ void multiplicationQuestion() {
 void divisionQuestion() {
   surface.setTitle("Assignment 1 - Division");
   background(255);
-  fill(0);
   text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + score, width/2, 500);
   userAnswer = int(userInput);
   operator = 4;
   text(divNum + " ÷ " + randNum2 + " = " + userInput, width/2, 100);
 }
 
+// Pong
+void runPong() {
+  surface.setTitle("Assignment 1 - Pong");
+  background(37, 37, 37);
+  fill(250);
+  text("Hi.", 50, 50); 
+}
 // Allows for keyboard input
 void keyPressed() {
   // Allows only for numbers to be inputted
