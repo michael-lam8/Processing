@@ -1,7 +1,6 @@
 // Michael Lam
-// April 2018
-
-// Look for NOTES before final submission.
+// April 20, 2018
+// Assignment 1: A program containing math equations for user to solve and Pong
 
 // Importing Interfascia library
 import interfascia.*;
@@ -32,7 +31,7 @@ void setup() {
 // Interfascia button setup
 void btnSetup() {
   c = new GUIController (this);
-  menuBtn = new IFButton ("\nMain Menu", 0, 0, 100, 50);
+  menuBtn = new IFButton ("\nMain Menu", 0, 0, 100, 50); // "\n" inserts a line break to center text
   additionBtn = new IFButton ("Addition", 100, 0, 100, 25);
   subtractionBtn = new IFButton ("Subtraction", 200, 0, 100, 25);
   multiplicationBtn = new IFButton ("Multiplication", 300, 0, 100, 25);
@@ -117,10 +116,11 @@ void additionQuestion() {
   resetPong();
   pongScore = 0;
   background(255);
-  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + mathScore, width/2, 500);
+  text("Score: " + mathScore, width/2, 480);
+  text("Correct: " + userCorrect + "   Incorrect: " + userIncorrect, width/2, 520);
   userAnswer = int(userInput);
   operator = 1;
-  text(randNumText1 + " + " + randNumText2 + " = " + userInput, width/2, 100);
+  text(randNumText1 + " + " + randNumText2 + " = " + userInput, width/2, height/2);
 }
 
 // Subtraction game mode
@@ -129,10 +129,11 @@ void subtractionQuestion() {
   resetPong();
   pongScore = 0;
   background(255);
-  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + mathScore, width/2, 500);
+  text("Score: " + mathScore, width/2, 480);
+  text("Correct: " + userCorrect + "   Incorrect: " + userIncorrect, width/2, 520);
   userAnswer = int(userInput);
   operator = 2;
-  text(divNum + " - " + randNum2 + " = " + userInput, width/2, 100);
+  text(divNum + " - " + randNum2 + " = " + userInput, width/2, height/2);
 }
 
 // Multiplication game mode
@@ -141,10 +142,11 @@ void multiplicationQuestion() {
   resetPong();
   pongScore = 0;
   background(255);
-  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + mathScore, width/2, 500);
+  text("Score: " + mathScore, width/2, 480);
+  text("Correct: " + userCorrect + "   Incorrect: " + userIncorrect, width/2, 520);
   userAnswer = int(userInput);
   operator = 3;
-  text(randNumText1 + " * " + randNumText2 + " = " + userInput, width/2, 100);
+  text(randNumText1 + " * " + randNumText2 + " = " + userInput, width/2, height/2);
 }
 
 // Division game mode
@@ -153,10 +155,11 @@ void divisionQuestion() {
   resetPong();
   pongScore = 0;
   background(255);
-  text("Correct: " + userCorrect + " Incorrect: " + userIncorrect + " Score: " + mathScore, width/2, 500);
+  text("Score: " + mathScore, width/2, 480);
+  text("Correct: " + userCorrect + "   Incorrect: " + userIncorrect, width/2, 520);
   userAnswer = int(userInput);
   operator = 4;
-  text(divNum + " ÷ " + randNum2 + " = " + userInput, width/2, 100);
+  text(divNum + " ÷ " + randNum2 + " = " + userInput, width/2, height/2);
 }
 
 // Single player Pong
