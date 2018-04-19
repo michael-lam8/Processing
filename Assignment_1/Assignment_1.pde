@@ -20,9 +20,9 @@ int pongScore = 0, pongScore2 = 0, rightPaddleSize = 150, leftPaddleY, rightPadd
 // Initial setup
 void setup() {
   size(600, 600);
-  PFont arialFont;
-  arialFont = createFont("Arial", 32, true);
-  textFont(arialFont);
+  PFont sfFont;
+  sfFont = createFont("SanFranciscoDisplay-Semibold", 32, true);
+  textFont(sfFont);
   textAlign(CENTER, CENTER);
   ellipseMode(CENTER);
   newMathQuestion();
