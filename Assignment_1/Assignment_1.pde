@@ -14,7 +14,7 @@ String userInput = "", operatorText, randNumText1, randNumText2, divNumText;
 // Declaring variables for Pong
 boolean gameStart = false;
 float ballX = 300, ballY = 200, speedX = random(3, 5), speedY = random(3, 5);
-int pongScore = 0, pongScore2 = 0, rightPaddleSize = 150, leftPaddleY, rightPaddleY;
+int pongScore = 0, pongScore2 = 0, rightPaddleSize = 150, leftPaddleY = 225, rightPaddleY = 225;
 
 // Initial setup
 void setup() {
@@ -37,8 +37,8 @@ void btnSetup() {
   multiplicationBtn = new IFButton ("Multiplication", 300, 0, 100, 25);
   divisionBtn = new IFButton ("Division", 400, 0, 100, 25);
   resetBtn = new IFButton ("\nReset", 500, 0, 100, 50);
-  pong1Btn = new IFButton ("1P Pong", 100, 25, 200, 25);
-  pong2Btn = new IFButton ("2P Pong", 300, 25, 200, 25);
+  pong1Btn = new IFButton ("Pong - Single Player", 100, 25, 200, 25);
+  pong2Btn = new IFButton ("Pong - Multiplayer", 300, 25, 200, 25);
 
   additionBtn.addActionListener(this);
   subtractionBtn.addActionListener(this);
@@ -74,9 +74,9 @@ void draw() {
   } else if (selectedMode == 4) {
     divisionQuestion();
   } else if (selectedMode == 5) {
-    runPong1();
+    runPong1P();
   } else if (selectedMode == 6) {
-    runPong2();
+    runPong2P();
   } else if (selectedMode == 0) {
     // Returns to draw() when Main Menu button is clicked.
     surface.setTitle("Main Menu"); // Sets window title
@@ -163,20 +163,20 @@ void divisionQuestion() {
 }
 
 // Single player Pong
-void runPong1() {
-  surface.setTitle("1P Pong");
+void runPong1P() {
+  surface.setTitle("Pong - Single Player");
   background(37);
   fill(37);
   stroke(255);
   rect(-1, 50, 601, 550); // Displays top border to leave room for buttons
   fill(250);
   text("Score: 0", width/2, 100);
-  text("Click to begin.", width/2, height/2-20);
+  text("Click to start.", width/2, height/2-20);
   text("Move the paddle with the mouse.", width/2, height/2+20);
   fill(250);
   ellipse(ballX, ballY, 20, 20);
   rect(0, 50, 10, 550);
-  rect(width-30, height/2-75, 10, rightPaddleSize);
+  rect(width-30, 225, 10, rightPaddleSize);
 
   if (gameStart == true) {
     // Clears text and allows paddle movement
@@ -213,26 +213,19 @@ void runPong1() {
 }
 
 // Two player Pong
-void runPong2() {
-  surface.setTitle("2P Pong");
+void runPong2P() {
+  surface.setTitle("Pong - Multiplayer");
   background(37);
-  fill(37);
-  stroke(255);
-  rect(-1, 50, 601, 550); // Displays top border to leave room for buttons
   fill(250);
-  text(pongScore2, 150, 100);
   text(pongScore, width-150, 100);
-  text("Click to begin.", width/2, height/2-40);
+  text(pongScore2, 150, 100);
+  text("Click to start.", width/2, height/2-40);
   text("Left player moves with W and S.", width/2, height/2);
   text("Right player moves with ↑ and ↓.", width/2, height/2+40);
   fill(250);
   ellipse(ballX, ballY, 20, 20);
-  rect(20, height/2-75, 10, 150);
-  rect(width-30, height/2-75, 10, 150);
-
-  // For some reason only works when set within this function
-  leftPaddleY = height/2-75;
-  rightPaddleY = height/2-75;
+  rect(20, 225, 10, 150);
+  rect(width-30, 225, 10, 150);
 
   if (gameStart == true) {
     // Clears text and allows paddle movement
@@ -276,14 +269,14 @@ void resetPong() {
   speedX = random(3, 5);
   speedY = random(3, 5);
   rightPaddleSize = 150;
-  leftPaddleY = height/2-75;
-  rightPaddleY = height/2-75;
+  leftPaddleY = 225;
+  rightPaddleY = 225;
 }
 
-// Starts game when mouse is pressed
+// Starts 1P Pong when mouse is pressed
 void mousePressed() {
-  // Starts game only when Pong is active and mouse is within game area
-  if (selectedMode == 5 || selectedMode == 6 && mouseY > 50) {
+  // Starts game only when Pong screen is active and mouse is within game area
+  if (selectedMode == 5 & mouseY > 50 || selectedMode == 6 && mouseY > 50) {
     gameStart = true;
   }
 }
@@ -301,7 +294,7 @@ void keyPressed() {
     } else if (key == RETURN || key == ENTER) { // Checks answer when enter is pressed
       checkAnswer();
     }
-  } else if (selectedMode == 6 && gameStart == true) { // Allows simultaneous controls when 2P Pong is active
+  } else if (selectedMode == 6 && gameStart == true) { // Allows controls for two players when 2P Pong is active
     if (key == 'w') {
       leftPaddleY -= 20;
     } else if (key == 's') {
@@ -314,6 +307,7 @@ void keyPressed() {
   }
 }
 
+// Checks user answer, then runs corresponding code
 void checkAnswer() {
   if (operator == 1) {
     if (userAnswer == randNum1 + randNum2) {
@@ -363,7 +357,7 @@ void incorrectAnswer() {
   newMathQuestion();
 }
 
-// Creates new integers
+// Creates new integers when user answers or manually resets game
 void newMathQuestion() {
   randNum1 = (int) random(1, 30);
   randNum2 = (int) random(20);
