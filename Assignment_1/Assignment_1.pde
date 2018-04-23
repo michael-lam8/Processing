@@ -1,5 +1,5 @@
 // Michael Lam
-// April 20, 2018
+// April 23, 2018
 // Assignment 1: A program containing math equations for user to solve and Pong
 
 // Importing Interfascia library
@@ -20,7 +20,7 @@ int pongScore = 0, pongScore2 = 0, rightPaddleSize = 150, leftPaddleY = 225, rig
 void setup() {
   size(600, 600);
   PFont sfFont;
-  sfFont = createFont("SanFranciscoDisplay-Semibold", 32, true);
+  sfFont = createFont("SanFranciscoDisplay-Semibold.otf", 16, true);
   textFont(sfFont);
   textAlign(CENTER, CENTER);
   ellipseMode(CENTER);
@@ -221,7 +221,7 @@ void runPong2P() {
   text(pongScore2, 150, 100);
   text("Click to start.", width/2, height/2-40);
   text("Left player moves with W and S.", width/2, height/2);
-  text("Right player moves with ↑ and ↓.", width/2, height/2+40);
+  text("Right player moves with arrow keys.", width/2, height/2+40);
   fill(250);
   ellipse(ballX, ballY, 20, 20);
   rect(20, 225, 10, 150);
