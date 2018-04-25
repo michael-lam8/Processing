@@ -14,6 +14,16 @@ Recent versions of macOS introduced the [Gatekeeper system](https://support.appl
 
 To run this application, open the "macOS Application" folder, Control-click or right-click Assignment_1.app, then select Open from the popup menu. Click Open once more in the dialog box.
 
+## Running the Code
+To examine and/or make changes to the code, [Processing](https://processing.org/download/) is required. Download and install the version corresponding to your operating system.
+
+To run the code from Processing, the Interfascia library must be installed.
+To install Interfascia, follow the following steps:
+1. Open Processing
+2. Go to Sketch > Import Library > Add Library...
+3. Under the Libraries tab, search for Interfascia
+4. Click Install
+
 ## Preview
 ### Addition Mode
 ![Addition mode](https://i.imgur.com/vyt6TGJ.png)
