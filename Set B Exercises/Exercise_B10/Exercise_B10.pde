@@ -1,46 +1,102 @@
-String sentence = "Whatever you put here, it must always be school appropriate.";
+// Michael Lam & Vinay Meldrum
+// May 2018
+// Program displays characteristics of a sentence, such as its character count
+
+// Declaring variables
+String sentence = "Do you want to build a snowman?";
 String sentenceLength = sentence;
 String[] sentenceArray = new String[sentenceLength.length()];
-int numberOfCapital;
+int numberOfCapital, numberOfVowels, maxLetters, punctuationCount, amountOfWords, index;
 
+// Initial setup
 void setup() {
+  background(0);
   size(600, 600);
   lengthOfSentence();
-  initializingSentenceArray();
   capitalLetters();
+  vowels();
+  wordCount();
+  punctuation();
+  mostUsedLetter();
 }
 
+// Displays sentence
 void draw() {
-  text(sentence, 100, 100);
-  noLoop(); //draw doesn't need to happen for this exercise
+  text("Sentence: " + sentence, 100, 150);
+  noLoop();
 }
 
+// Displays length of the sentence
 void lengthOfSentence() {
-  text("Length of the sentence: " + sentenceLength.length(), 100, 200);
+  text("Length of the sentence: " + sentenceLength.length() + " characters", 100, 200);
 }
 
-void initializingSentenceArray() {
-  for (int i = 0; i < sentence.length(); i++) {
-    sentenceArray = (split(sentence, ' '));
-  }
-}
+// Displays the amount of capital letters
 void capitalLetters() {
-  for (int i = 0; i < sentenceArray.length; i++) {
-    if (sentenceArray[i] == "(?=[A-Z])") {
+  //Looping over the length of the string.
+  for (int i = 0; i < sentence.length(); i++) {
+    //Making the string a character. char means character.
+    //So, it will become c will become the character based off of how far you
+    //are in the loop cause of the charAt(i).
+    char c = sentence.charAt(i);
+    //This is the real code, checking if it is between A and Z. Then adding
+    //1 to the count. EZPZ.
+    if (c >= 'A' && c <= 'Z') {
       numberOfCapital++;
     }
   }
-  text("Number of capital letters: " + numberOfCapital, 100, 300);
+  text("Number of capital letters: " + numberOfCapital, 100, 250);
 }
 
+// Displays the amount of vowels
+void vowels() {
+  for (int i = 0; i < sentence.length(); i++) {
+    char c = sentence.charAt(i);
+    if (c == 'a' || c == 'A' || c == 'e' || c == 'E' || c == 'i' || c == 'I' || c == 'o' || c == 'O' || c == 'u' || c == 'U') {
+      numberOfVowels++;
+    }
+  }
+  text("Number of vowels: " + numberOfVowels, 100, 300);
+}
 
-/* Using the above block of text as a starting point, create a program that displays the following:
- 
- The length (in characters) of the sentence (e.g. 60 characters)
- The number of capital letters in the sentence (e.g. 1)
- The number of vowels in the sentence (always exclude 'y') (e.g. 20)
- The number of words in the sentence (e.g. 10)
- The number of punctuation marks in the sentence (count ', :, ;, ., ,, !, ? only) (e.g. 2)
- The most used letter in the sentence (e.g. e : 6)
- You can either have the answers printed to the screen using text() or to the console using println().
- */
+// Displays the amount of words
+void wordCount() {
+  for (int i = 0; i < sentence.length(); i++) {
+    String[] list = split(sentence, ' ');
+    amountOfWords = list.length;
+  }
+  text("Number of words in sentence: " + amountOfWords, 100, 350);
+}
+
+// Displays the amount of punctuation marks
+void punctuation() {
+  for (int i = 0; i < sentence.length(); i++) {
+    char c = sentence.charAt(i);
+    if (c == '\'' || c == ':' || c ==  ';' || c == '.' || c == ',' || c == '!' || c == '?') {
+      punctuationCount++;
+    }
+  }
+  text("Number of punctuation marks: " + punctuationCount, 100, 400);
+}
+
+// Displays the most frequently occuring character
+void mostUsedLetter() {
+  //Lowercase
+  char[] lowercaseArray = sentence.toLowerCase().toCharArray();
+  int[] allLetters = new int [26];
+  for (int i = 0; i < lowercaseArray.length; i++) {
+    //Making sure it is a letter  
+    if (lowercaseArray[i] >= 'a' && lowercaseArray[i] <='z') {
+      //ASCII value. Subtract a from anything and you get the correct index. a - b = 1. a - a = 0.
+      allLetters[lowercaseArray[i]-'a']++;
+    }
+  } //maxLetters, index
+  for (int i = 0; i < allLetters.length; i++) {
+    if (allLetters[i] > maxLetters) {
+      maxLetters = allLetters[i];
+      index = i;
+    }
+  }
+  char mostOccuringLetter = char('a' + index);
+  text("Most occuring letter: " + mostOccuringLetter + " has occured " + maxLetters + " times.", 100, 450);
+}
