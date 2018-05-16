@@ -1,27 +1,38 @@
 // Michael Lam & Vinay Meldrum
 // May 4, 2018
-// This program loads a text file and displays its characteristics, such as its character count
+// This program loads text files and displays a specified characteristics, such as its character count
+
+// Last updated May 15, 2018
+// - Refactored code in preparation for Assignment 2
+// - All text files are now used simultaneously rather than being randomly chosen as per the instructions
+// - Changed function names to match closer with variable names
+// - Corrected spelling mistakes
 
 // Declaring variables
-String[] sentence;
-String txt;
-int decider, numberOfCapital, numberOfVowels, maxLetters, punctuationCount, amountOfWords, index;
-
-// Loading files
-String ot[] = loadStrings("othello.txt");
-String illiad[] = loadStrings("illiad.txt");
-String romeo[] = loadStrings("romeoAndJuliet.txt");
-String the[] = loadStrings("theOdyssey.txt");
-String hamlet[] = loadStrings("hamlet.txt");
-String macbeth[] = loadStrings("macbeth.txt");
+String othelloChar, illiadChar, romeoChar, odysseyChar, hamletChar, macbethChar;
+String[][] fileText = new String[6][];
+int numberOfCapital, numberOfVowels, maxLetters, punctuationCount, amountOfWords, index;
 
 // Initial setup
 void setup() {
+  // Loading files and converting them to one string
+  fileText[0] = loadStrings("othello.txt");
+  fileText[1] = loadStrings("illiad.txt");
+  fileText[2] = loadStrings("romeoAndJuliet.txt");
+  fileText[3] = loadStrings("theOdyssey.txt");
+  fileText[4] = loadStrings("hamlet.txt");
+  fileText[5] = loadStrings("macbeth.txt");
+  othelloChar = join(fileText[0], "");
+  illiadChar = join(fileText[1], "");
+  romeoChar = join(fileText[2], "");
+  odysseyChar = join(fileText[3], "\n");
+  hamletChar = join(fileText[4], "");
+  macbethChar = join(fileText[5], "").toLowerCase();
+
   background(0);
   size(600, 600);
-  selectFile();
-  lengthOfText();
-  capitalLetters();
+  characterCount();
+  capitalCharacters();
   vowels();
   wordCount();
   punctuation();
@@ -33,109 +44,68 @@ void draw() {
   noLoop();
 }
 
-// Randomly selects a file
-void selectFile() {
-  decider = (int)random(0, 5);
-  if (decider == 0) {
-    sentence = ot;
-    txt = join(sentence, "\n");
-    text("File opened: othello.txt", 100, 150);
-  } else if (decider == 1) {
-    sentence = illiad;
-    txt = join(sentence, "\n");
-    text("File opened: illiad.txt", 100, 150);
-  } else if (decider == 2) {
-    sentence = romeo;
-    txt = join(sentence, "\n");
-    text("File opened: romeoAndJuliet.txt", 100, 150);
-  } else if (decider == 3) {
-    sentence = the;
-    txt = join(sentence, "\n");
-    text("File opened: theOdyssey.txt", 100, 150);
-  } else if (decider == 4) {
-    sentence = hamlet;
-    txt = join(sentence, "\n");
-    text("File opened: hamlet.txt", 100, 150);
-  } else {
-    sentence = macbeth;
-    txt = join(sentence, "\n");
-    text("File opened: macbeth.txt", 100, 150);
-  }
+// Determines the number of characters in othello.txt
+void characterCount() {
+  text("Number of characters in othello.txt: " + othelloChar.length() + " characters", 100, 200);
 }
 
-// Determines character count of text file
-void lengthOfText() {
-  text("Length of text file: " + txt.length() + " characters", 100, 200);
-}
-
-// Determines the amount of capital characters
-void capitalLetters() {
-  //Looping over the length of the string.
-  for (int i = 0; i < txt.length(); i++) {
-    //Making the string a character. char means character.
-    //So, it will become c will become the character based off of how far you
-    //are in the loop cause of the charAt(i).
-    char c = txt.charAt(i);
-    //This is the real code, checking if it is between A and Z. Then adding
-    //1 to the count. EZPZ.
+// Determines the amount of capital characters in illiad.txt
+void capitalCharacters() {
+  for (int i = 0; i < illiadChar.length(); i++) {
+    char c = illiadChar.charAt(i);
     if (c >= 'A' && c <= 'Z') {
       numberOfCapital++;
     }
   }
-  text("Number of capital letters: " + numberOfCapital, 100, 250);
+  text("Number of capital letters in illiad.txt: " + numberOfCapital, 100, 250);
 }
 
-// Determines the amount of vowels
+
+// Determines the amount of vowels in romeoAndJuliet.txt
 void vowels() {
-  for (int i = 0; i < txt.length(); i++) {
-    char c = txt.charAt(i);
+  for (int i = 0; i < romeoChar.length(); i++) {
+    char c = romeoChar.charAt(i);
     if (c == 'a' || c == 'A' || c == 'e' || c == 'E' || c == 'i' || c == 'I' || c == 'o' || c == 'O' || c == 'u' || c == 'U') {
       numberOfVowels++;
     }
   }
-  text("Number of vowels: " + numberOfVowels, 100, 300);
+  text("Number of vowels in romeoAndJuliet.txt: " + numberOfVowels, 100, 300);
 }
 
-// Determines the amount of words
+// Determines the amount of words in theOdyssey.txt
 void wordCount() {
-  for (int i = 0; i < txt.length(); i++) {
-    String[] list = split(txt, ' ');
-    amountOfWords = list.length;
-    text("Number of words: " + amountOfWords, 100, 350);
-  }
+  String[] odysseyWords = splitTokens(odysseyChar);
+  amountOfWords = odysseyWords.length;
+  text("Number of words in theOdyssey.txt: " + amountOfWords, 100, 350);
 }
 
-// Determines the amount of punctuation marks
+// Determines the amount of punctuation marks in hamlet.txt
 void punctuation() {
-  for (int i = 0; i < txt.length(); i++) {
-    char c = txt.charAt(i);
+  for (int i = 0; i < hamletChar.length(); i++) {
+    char c = hamletChar.charAt(i);
     if (c == '\'' || c == ':' || c ==  ';' || c == '.' || c == ',' || c == '!' || c == '?') {
       punctuationCount++;
     }
-    text("Number of punctuation marks: " + punctuationCount, 100, 400);
-    println("Number of punctuation marks: " + punctuationCount);
   }
+  text("Number of punctuation marks in hamlet.txt: " + punctuationCount, 100, 400);
 }
 
-// Determines the most frequently occuring letter
+// Determines the most frequently occurring letter in macbeth.txt
 void mostUsedLetter() {
-  //Lowercase
-  char[] lowercaseArray = txt.toLowerCase().toCharArray();
+  char[] lowercaseArray = macbethChar.toCharArray();
   int[] allLetters = new int [26];
   for (int i = 0; i < lowercaseArray.length; i++) {
-    //Making sure it is a letter
     if (lowercaseArray[i] >= 'a' && lowercaseArray[i] <='z') {
-      //ASCII value. Subtract a from anything and you get the correct index. a - b = 1. a - a = 0.
+      // ASCII value. Subtract a from anything and you get the correct index. a - b = 1. a - a = 0.
       allLetters[lowercaseArray[i]-'a']++;
     }
-  } //maxLetters, index
+  } // maxLetters, index
   for (int i = 0; i < allLetters.length; i++) {
     if (allLetters[i] > maxLetters) {
       maxLetters = allLetters[i];
       index = i;
     }
-    char mostOccuringLetter = char('a' + index);
-    text("Most occuring letter: " + mostOccuringLetter + " has occured " + maxLetters + " times.", 100, 450);
-    println("Most occuring letter: " + mostOccuringLetter + " has occured " + maxLetters + " times.");
   }
+  char mostOccurringLetter = char('a' + index);
+  text("Most occurring letter in macbeth.txt: " + mostOccurringLetter + " has occured " + maxLetters + " times.", 100, 450);
 }
