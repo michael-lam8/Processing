@@ -4,6 +4,7 @@
 
 // Last updated May 15, 2018
 // - Refactored code in preparation for Assignment 2
+// - Bug fix: program no longer halts at start and displays all characteristics
 // - All text files are now used simultaneously rather than being randomly chosen as per the instructions
 // - Changed function names to match closer with variable names
 // - Corrected spelling mistakes
