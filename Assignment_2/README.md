@@ -4,5 +4,5 @@ This Processing program contains all exercises from this repository and allows s
 ## Preview
 Images will be added at a later date.
 
-June 1st, 2018
+June 1st, 2018  
 ICS3U
