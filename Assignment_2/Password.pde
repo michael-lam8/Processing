@@ -2,7 +2,7 @@ class Password {
   String user = "";
   String password = "";
 
-  Password(String tempUser, String tempPassword) {
+  Password (String tempUser, String tempPassword) {
     user = tempUser;
     saveEncryptedPassword(encryptPassword(tempPassword));
   }
@@ -17,14 +17,14 @@ class Password {
 
   void saveEncryptedPassword (String password) {
     PrintWriter writePassword;
-    writePassword = createWriter("/data/" + user + "Password.txt");
+    writePassword = createWriter("/data/" + user + " Password.txt");
     writePassword.println(password);
     writePassword.flush();
     writePassword.close();
   }
 
   boolean comparePassword (String password) {
-    String[] passwordArray = loadStrings("/data/" + user + "Password.txt");
+    String[] passwordArray = loadStrings("/data/" + user + " Password.txt");
     return passwordArray[0].equals(encryptPassword(password));
   }
 }
