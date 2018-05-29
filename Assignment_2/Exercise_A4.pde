@@ -12,7 +12,7 @@
 class Exercise_A4 {
   int n = 0;
   float circleSize1 = 0, circleSize2 = 0;
-  
+
   void draw() {
     background(0);
     colorMode(HSB);
@@ -23,5 +23,10 @@ class Exercise_A4 {
     fill(n % 255, 255, 255);
     ellipse(300, 0 + n, circleSize1, circleSize1);
     ellipse(0 + n, 300, circleSize2, circleSize2);
+    if (n - circleSize1 >= 460) {
+      n = 0;
+      circleSize1 = 0;
+      circleSize2 = 0;
+    }
   }
 }

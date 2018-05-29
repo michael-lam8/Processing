@@ -284,4 +284,63 @@ class Exercise_B8 {
     randNumText2 = str(randNum2);
     divNum = randNum1 * randNum2;
   }
+
+  // Resets everything when Reset button is clicked
+  void resetAll() {
+    newMathQuestion();
+    mathScore = 0;
+    userCorrect = 0;
+    userIncorrect = 0;
+    userInput = "";
+    resetPong();
+    pongScore = 0;
+  }
+
+  void mouseClicked() {
+    if (mouseX > 0 && mouseX < 100 && mouseY > 0 && mouseY < 50) {
+      selectedMode = 0;
+    } else if (mouseX > 100 && mouseX < 200 && mouseY > 0 && mouseY < 25) {
+      selectedMode = 1;
+    } else if (mouseX > 200 && mouseX < 300 && mouseY > 0 && mouseY < 25) {
+      selectedMode = 2;
+    } else if (mouseX > 300 && mouseX < 400 && mouseY > 0 && mouseY < 25) {
+      selectedMode = 3;
+    } else if (mouseX > 400 && mouseX < 500 && mouseY > 0 && mouseY < 25) {
+      selectedMode = 4;
+    } else if (mouseX > 500 && mouseX < 600 && mouseY > 0 && mouseY < 50) {
+      resetAll();
+    } else if (mouseX > 100 && mouseX < 300 && mouseY > 25 && mouseY < 50) {
+      selectedMode = 5;
+    } else if (mouseX > 300 && mouseX < 500 && mouseY > 25 && mouseY < 50) {
+      selectedMode = 6;
+    }
+    // Starts game only when Pong screen is active and mouse is within game area
+    if (selectedMode == 5 & mouseY > 50 || selectedMode == 6 && mouseY > 50) {
+      gameStart = true;
+    }
+  }
+
+  void keyPressed() {
+    if (selectedMode < 5 && selectedMode > 0) { // Allows only numbers to be inputted in math modes
+      keystroke = int(key);
+      keystroke = keystroke - 48;
+      if (keystroke >= 0 && keystroke <= 9) {
+        userInput += key;
+      } else if (key == BACKSPACE) { // Deletes characters when backspace is pressed
+        userInput = userInput.substring(0, max(0, userInput.length()-1));
+      } else if (key == RETURN || key == ENTER) { // Checks answer when enter is pressed
+        checkAnswer();
+      }
+    } else if (selectedMode == 6 && gameStart == true) { // Allows controls for two players when 2P Pong is active
+      if (key == 'w') {
+        leftPaddleY -= 20;
+      } else if (key == 's') {
+        leftPaddleY += 20;
+      } else if (keyCode == UP) {
+        rightPaddleY -= 20;
+      } else if (keyCode == DOWN) {
+        rightPaddleY += 20;
+      }
+    }
+  }
 }

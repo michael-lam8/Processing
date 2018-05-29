@@ -8,6 +8,8 @@
 
 class Exercise_B10 {
   // Declaring variables
+  boolean programEnd = false;
+  char mostOccuringLetter;
   String sentence = "Do you want to build a snowman?";
   String[] sentenceArray = new String[sentence.length()];
   int numberOfCapital, numberOfVowels, maxLetters, punctuationCount, amountOfWords, index;
@@ -17,18 +19,22 @@ class Exercise_B10 {
     background(0);
     textAlign(LEFT);
     textSize(12);
-    lengthOfSentence();
-    capitalLetters();
-    vowels();
-    wordCount();
-    punctuation();
-    mostUsedLetter();
-    text("Sentence: " + sentence, 50, 150);
-  }
-
-  // Displays length of the sentence
-  void lengthOfSentence() {
-    text("Length of the sentence: " + sentence.length() + " characters", 50, 200);
+    if (programEnd == false) {
+      capitalLetters();
+      vowels();
+      wordCount();
+      punctuation();
+      mostUsedLetter();
+      programEnd = true;
+    } else {
+      text("Sentence: " + sentence, 50, 150);
+      text("Length of the sentence: " + sentence.length() + " characters", 50, 200);
+      text("Number of capital letters: " + numberOfCapital, 50, 250);
+      text("Number of vowels: " + numberOfVowels, 50, 300);
+      text("Number of words in sentence: " + amountOfWords, 50, 350);
+      text("Number of punctuation marks: " + punctuationCount, 50, 400);
+      text("Most occuring letter: " + mostOccuringLetter + " has occured " + maxLetters + " times.", 50, 450);
+    }
   }
 
   // Displays the amount of capital letters
@@ -40,7 +46,6 @@ class Exercise_B10 {
         numberOfCapital++;
       }
     }
-    text("Number of capital letters: " + numberOfCapital, 50, 250);
   }
 
   // Displays the amount of vowels
@@ -51,7 +56,6 @@ class Exercise_B10 {
         numberOfVowels++;
       }
     }
-    text("Number of vowels: " + numberOfVowels, 50, 300);
   }
 
   // Displays the amount of words
@@ -60,7 +64,6 @@ class Exercise_B10 {
       String[] list = split(sentence, ' ');
       amountOfWords = list.length;
     }
-    text("Number of words in sentence: " + amountOfWords, 50, 350);
   }
 
   // Displays the amount of punctuation marks
@@ -71,7 +74,6 @@ class Exercise_B10 {
         punctuationCount++;
       }
     }
-    text("Number of punctuation marks: " + punctuationCount, 50, 400);
   }
 
   // Displays the most frequently occuring character
@@ -89,7 +91,6 @@ class Exercise_B10 {
         index = i;
       }
     }
-    char mostOccuringLetter = char('a' + index);
-    text("Most occuring letter: " + mostOccuringLetter + " has occured " + maxLetters + " times.", 50, 450);
+    mostOccuringLetter = char('a' + index);
   }
 }

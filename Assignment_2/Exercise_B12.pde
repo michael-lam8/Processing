@@ -11,6 +11,8 @@
 
 class Exercise_B12 {
   // Declaring variables
+  boolean programEnd = false;
+  char mostOccurringLetter;
   String othelloChar, illiadChar, romeoChar, odysseyChar, hamletChar, macbethChar;
   String[][] fileText = new String[6][];
   int numberOfCapital, numberOfVowels, maxLetters, punctuationCount, amountOfWords, index;
@@ -33,17 +35,21 @@ class Exercise_B12 {
     background(0);
     textAlign(LEFT);
     textSize(9);
-    characterCount();
-    capitalCharacters();
-    vowels();
-    wordCount();
-    punctuation();
-    mostUsedLetter();
-  }
-
-  // Determines the number of characters in othello.txt
-  void characterCount() {
-    text("Number of characters in othello.txt: " + othelloChar.length() + " characters", 50, 175);
+    if (programEnd == false) {
+      capitalCharacters();
+      vowels();
+      wordCount();
+      punctuation();
+      mostUsedLetter();
+      programEnd = true;
+    } else {
+      text("Number of characters in othello.txt: " + othelloChar.length() + " characters", 50, 175);
+      text("Number of capital letters in illiad.txt: " + numberOfCapital, 50, 225);
+      text("Number of vowels in romeoAndJuliet.txt: " + numberOfVowels, 50, 275);
+      text("Number of words in theOdyssey.txt: " + amountOfWords, 50, 325);
+      text("Number of punctuation marks in hamlet.txt: " + punctuationCount, 50, 375);
+      text("Most occurring letter in macbeth.txt: " + mostOccurringLetter + " has occured " + maxLetters + " times.", 50, 425);
+    }
   }
 
   // Determines the amount of capital characters in illiad.txt
@@ -54,7 +60,6 @@ class Exercise_B12 {
         numberOfCapital++;
       }
     }
-    text("Number of capital letters in illiad.txt: " + numberOfCapital, 50, 225);
   }
 
 
@@ -66,14 +71,12 @@ class Exercise_B12 {
         numberOfVowels++;
       }
     }
-    text("Number of vowels in romeoAndJuliet.txt: " + numberOfVowels, 50, 275);
   }
 
   // Determines the amount of words in theOdyssey.txt
   void wordCount() {
     String[] odysseyWords = splitTokens(odysseyChar);
     amountOfWords = odysseyWords.length;
-    text("Number of words in theOdyssey.txt: " + amountOfWords, 50, 325);
   }
 
   // Determines the amount of punctuation marks in hamlet.txt
@@ -84,7 +87,6 @@ class Exercise_B12 {
         punctuationCount++;
       }
     }
-    text("Number of punctuation marks in hamlet.txt: " + punctuationCount, 50, 375);
   }
 
   // Determines the most frequently occurring letter in macbeth.txt
@@ -103,7 +105,6 @@ class Exercise_B12 {
         index = i;
       }
     }
-    char mostOccurringLetter = char('a' + index);
-    text("Most occurring letter in macbeth.txt: " + mostOccurringLetter + " has occured " + maxLetters + " times.", 50, 425);
+    mostOccurringLetter = char('a' + index);
   }
 }

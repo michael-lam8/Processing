@@ -16,6 +16,7 @@ class Exercise_A5 {
 
   void draw() {
     background(0);
+    stroke(0);
     strokeWeight(1);
     colorMode(HSB);
     c += 4;
@@ -27,6 +28,10 @@ class Exercise_A5 {
       c = 0; // Resets colours
       y = 0; // Resets y position of circles back to top
       a += 2; // Increases the x position of circles to the right
+    }
+    if (x == 625) {
+      x = 0;
+      y = 0;
     }
   }
 }
