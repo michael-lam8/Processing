@@ -1,6 +1,7 @@
 // Michael Lam & Vinay Meldrum
-// May 2018
-// Program displays characteristics of a sentence, such as its character count
+// May 4, 2018
+// Set B, Exercise 10 & 11: Program displays characteristics of a sentence, such as its character count.
+// Note: Exercise 10 and 11 are identical in function, except that Exercise 11 requires functions. The following code represents Exercise 11.
 
 // Last updated May 26, 2018
 // - Removed draw() to shorten code as the program does not need to run continuously

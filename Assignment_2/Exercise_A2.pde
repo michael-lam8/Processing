@@ -1,6 +1,6 @@
 // Michael Lam
 // March 8, 2018
-// Beautiful, colourful arcs. Vinay.
+// Set A, Exercise 2: Beautiful, colourful arcs.
 
 // Last updated May 26, 2018
 // - Canvas size decreased to accomodate Assignment 2

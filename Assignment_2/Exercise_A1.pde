@@ -1,6 +1,6 @@
 // Michael Lam
 // March 7, 2018
-// A beautiful scenery, minus the sun.
+// Set A, Exercise 1: A beautiful scenery, minus the sun.
 
 // Last updated May 26, 2018
 // - Canvas size decreased to accomodate Assignment 2

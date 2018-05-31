@@ -1,6 +1,6 @@
 // Michael Lam
 // March 18, 2018
-// A 29x16 grid of beautiful, small circles. And a big circle.
+// Set A, Exercise 7: A 29x16 grid of beautiful, small circles. And a big circle.
 
 // Last updated May 26, 2018
 // - Canvas size increased to accomodate Assignment 2

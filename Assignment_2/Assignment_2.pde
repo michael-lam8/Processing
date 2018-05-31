@@ -4,7 +4,7 @@
 
 // Declaring variables
 Boolean incorrectAttempt = false, switchUsersClicked = false;
-int loginScreen = 0, userLoggedIn = 0, switchUsersScreen = 0, userSwitching = 0, superUserScreen = 1, menuActive = 0, menuBarY = 8, runExercise = 0;
+int loginScreen = 0, userLoggedIn = 0, userSwitching = 0, superUserScreen = 1, menuActive = 0, menuBarY = 8, runExercise = 0;
 String passwordInput = "", asterisks = "", fieldHint = "Password";
 
 // Declaring arrays
@@ -16,7 +16,7 @@ String[] users = {"User A", "User B", "Super User"};
 PFont sfFont;
 PImage userAImg, userBImg, superUserImg, backgroundImg, returnImg, enterImg, dropdownImg, cancelImg;
 
-// Declaring exercises
+// Declaring instances
 Exercise_A1 exercise1 = new Exercise_A1();
 Exercise_A2 exercise2 = new Exercise_A2();
 Exercise_A3 exercise3 = new Exercise_A3();
@@ -28,39 +28,14 @@ Exercise_B8 exercise8 = new Exercise_B8();
 Exercise_B9 exercise9 = new Exercise_B9();
 Exercise_B10 exercise10 = new Exercise_B10();
 Exercise_B12 exercise12 = new Exercise_B12();
+Password password = new Password();
+ProgramSetup program = new ProgramSetup();
 
 // Initial setup
 void setup() {
-  surface.setTitle("Assignment 2"); // Sets window title
   size(600, 600);
   smooth(8);
-  textAlign(CENTER, CENTER);
-  rectMode(CENTER);
-  imageMode(CENTER);
-  sfFont = createFont("SanFranciscoDisplay-Semibold.otf", 14, true);
-  textFont(sfFont);
-  userAImg = loadImage("userA.png");
-  userBImg = loadImage("userB.png");
-  superUserImg = loadImage("superUser.png");
-  backgroundImg = loadImage("background.png");
-  returnImg = loadImage("return.png");
-  enterImg = loadImage("enter.png");
-  dropdownImg = loadImage("dropdown.png");
-  cancelImg = loadImage("cancel.png");
-  userLogin[0] = new Password(users[0], "Hello");
-  userLogin[1] = new Password(users[1], "World!");
-  userLogin[2] = new Password(users[2], "P@s$w0rd123");
-  button[0] = new Buttons(175, 170, "Exercise 1");
-  button[1] = new Buttons(420, 170, "Exercise 2");
-  button[2] = new Buttons(175, 265, "Exercise 3");
-  button[3] = new Buttons(420, 265, "Exercise 4");
-  button[4] = new Buttons(175, 360, "Exercise 5");
-  button[5] = new Buttons(420, 360, "Exercise 6");
-  button[6] = new Buttons(300, 455, "Exercise 7");
-  button[7] = new Buttons(175, 257, "Exercise 8");
-  button[8] = new Buttons(420, 257, "Exercise 9");
-  button[9] = new Buttons(175, 342, "Exercise 10/11");
-  button[10] = new Buttons(420, 342, "Exercise 12");
+  program.setup();
 }
 
 // Login screen
@@ -173,7 +148,13 @@ void userAMenu() {
   image(dropdownImg, 190, 42, 25, 16);
   if (switchUsersClicked) {
     switchUsers();
-    switchUsersScreen = 1;
+    image(userAImg, 42, 42, 50, 50);
+    text("User A", 125, 40);
+    image(userBImg, 42, 125, 50, 50);
+    text("User B", 125, 123);
+    image(superUserImg, 42, 192, 50, 50);
+    text("Super User", 154, 190);
+    image(enterImg, 190, 42, 16, 25);
   }
 }
 
@@ -186,7 +167,13 @@ void userBMenu() {
   image(dropdownImg, 190, 42, 25, 16);
   if (switchUsersClicked) {
     switchUsers();
-    switchUsersScreen = 2;
+    image(userBImg, 42, 42, 50, 50);
+    text("User B", 125, 40);
+    image(userAImg, 42, 125, 50, 50);
+    text("User A", 125, 123);
+    image(superUserImg, 42, 192, 50, 50);
+    text("Super User", 154, 190);
+    image(enterImg, 190, 42, 16, 25);
   }
 }
 
@@ -205,7 +192,13 @@ void superUserMenu() {
   image(dropdownImg, 240, 42, 25, 16);
   if (switchUsersClicked) {
     switchUsers();
-    switchUsersScreen = 3;
+    image(superUserImg, 42, 42, 50, 50);
+    text("Super User", 154, 40);
+    image(userAImg, 42, 125, 50, 50);
+    text("User A", 125, 123);
+    image(userBImg, 42, 192, 50, 50);
+    text("User B", 125, 190);
+    image(enterImg, 240, 42, 16, 25);
   }
 }
 
@@ -264,36 +257,6 @@ void returnToMenu() {
 
 // Displays a panel that allows switching between users
 void switchUsers() {
-  showSwitchUsersElements();
-  if (switchUsersScreen == 1) {
-    image(userAImg, 42, 42, 50, 50);
-    text("User A", 125, 40);
-    image(userBImg, 42, 125, 50, 50);
-    text("User B", 125, 123);
-    image(superUserImg, 42, 192, 50, 50);
-    text("Super User", 154, 190);
-    image(enterImg, 190, 42, 16, 25);
-  } else if (switchUsersScreen == 2) {
-    image(userBImg, 42, 42, 50, 50);
-    text("User B", 125, 40);
-    image(userAImg, 42, 125, 50, 50);
-    text("User A", 125, 123);
-    image(superUserImg, 42, 192, 50, 50);
-    text("Super User", 154, 190);
-    image(enterImg, 190, 42, 16, 25);
-  } else if (switchUsersScreen == 3) {
-    image(superUserImg, 42, 42, 50, 50);
-    text("Super User", 154, 40);
-    image(userAImg, 42, 125, 50, 50);
-    text("User A", 125, 123);
-    image(userBImg, 42, 192, 50, 50);
-    text("User B", 125, 190);
-    image(enterImg, 240, 42, 16, 25);
-  }
-}
-
-// Draws the Switch User panel and buttons
-void showSwitchUsersElements() {
   fill(0, 200);
   rect(300, 300, width, height);
   fill(38);
@@ -312,56 +275,53 @@ void showSwitchUsersElements() {
 // Runs following code if mouse is clicked
 void mouseClicked() {
   if (loginScreen == 0) {
-    if (dist(mouseX, mouseY, 125, 250) < 62.5) {
+    if (dist(mouseX, mouseY, 125, 250) < 62.5) { // Runs User A login
       loginScreen = 1;
-    } else if (dist(mouseX, mouseY, 300, 250) < 62.5) {
+    } else if (dist(mouseX, mouseY, 300, 250) < 62.5) { // Runs User B login
       loginScreen = 2;
-    } else if (dist(mouseX, mouseY, 475, 250) < 62.5) {
+    } else if (dist(mouseX, mouseY, 475, 250) < 62.5) { // Runs Super User login
       loginScreen = 3;
     }
   } else if (loginScreen >= 1 && loginScreen <= 3) {
-    if (mouseX > 489 && mouseX < 489+22 && mouseY > 262.5 && mouseY < 262.5+35) { // Runs code if enter button is clicked
-      checkPassword();
-    } else if (mouseX > 282.5 && mouseX < 282.5+35 && mouseY > 432.5 && mouseY < 432.5+35) { // Cancel button
-      if (userSwitching == 0) {
+    if (mouseX > 489 && mouseX < 489+22 && mouseY > 262.5 && mouseY < 262.5+35) { // Runs when enter button is clicked
+      password.checkPassword();
+    } else if (mouseX > 282.5 && mouseX < 282.5+35 && mouseY > 432.5 && mouseY < 432.5+35) { // Runs when cancel button is clicked
+      if (userSwitching == 0) { // If cancelling from initial login process
         loginScreen = 0;
-        resetPasswordField();
-      } else if (userSwitching == 1) {
+        password.resetPasswordField();
+      } else if (userSwitching == 1) { // If User A is switching accounts
         userLoggedIn = 1;
         switchUsersClicked = true;
-        resetPasswordField();
-      } else if (userSwitching == 2) {
+        password.resetPasswordField();
+      } else if (userSwitching == 2) { // If User B is switching accounts
         userLoggedIn = 2;
         switchUsersClicked = true;
-        resetPasswordField();
-      } else if (userSwitching == 3) {
+        password.resetPasswordField();
+      } else if (userSwitching == 3) { // If Super User is switching accounts
         userLoggedIn = 3;
         switchUsersClicked = true;
-        resetPasswordField();
+        password.resetPasswordField();
       }
     }
   }
   if (userLoggedIn == 1) {
     if (menuActive == 1) {
       checkIfSetAClicked();
-      if (mouseX > 0 && mouseX < 265 && mouseY > 0 && mouseY < 70) {
+      if (mouseX > 0 && mouseX < 265 && mouseY > 0 && mouseY < 70) { // Opens Switch Users panel if user icon/name is clicked
         switchUsersClicked = true;
         menuActive = 2;
       }
     } else if (menuActive == 2) {
-      if (mouseX > 0 && mouseX < 265 && mouseY > 0 && mouseY < 70 || mouseX > 265 && mouseX < width && mouseY > 0 && mouseY < height) {
+      if (mouseX > 0 && mouseX < 265 && mouseY > 0 && mouseY < 70 || mouseX > 265 && mouseX < width && mouseY > 0 && mouseY < height) { // Returns to menu
         switchUsersClicked = false;
-        switchUsersScreen = 0;
         menuActive = 1;
       } else if (mouseX > 0 && mouseX < 265 && mouseY > 80 && mouseY < 160) {
         switchUsersClicked = false;
-        switchUsersScreen = 0;
         userLoggedIn = 0;
         loginScreen = 2;
         userSwitching = 1;
       } else if (mouseX > 0 && mouseX < 265 && mouseY > 160 && mouseY < 240) {
         switchUsersClicked = false;
-        switchUsersScreen = 0;
         userLoggedIn = 0;
         loginScreen = 3;
         userSwitching = 1;
@@ -377,17 +337,14 @@ void mouseClicked() {
     } else if (menuActive == 2) {
       if (mouseX > 0 && mouseX < 265 && mouseY > 0 && mouseY < 70 || mouseX > 265 && mouseX < width && mouseY > 0 && mouseY < height) {
         switchUsersClicked = false;
-        switchUsersScreen = 0;
         menuActive = 1;
       } else if (mouseX > 0 && mouseX < 265 && mouseY > 80 && mouseY < 160) {
         switchUsersClicked = false;
-        switchUsersScreen = 0;
         userLoggedIn = 0;
         loginScreen = 1;
         userSwitching = 2;
       } else if (mouseX > 0 && mouseX < 265 && mouseY > 160 && mouseY < 240) {
         switchUsersClicked = false;
-        switchUsersScreen = 0;
         userLoggedIn = 0;
         loginScreen = 3;
         userSwitching = 2;
@@ -413,17 +370,14 @@ void mouseClicked() {
     } else if (menuActive == 2) {
       if (mouseX > 0 && mouseX < 265 && mouseY > 0 && mouseY < 70 || mouseX > 265 && mouseX < width && mouseY > 0 && mouseY < height) {
         switchUsersClicked = false;
-        switchUsersScreen = 0;
         menuActive = 1;
       } else if (mouseX > 0 && mouseX < 265 && mouseY > 80 && mouseY < 160) {
         switchUsersClicked = false;
-        switchUsersScreen = 0;
         userLoggedIn = 0;
         loginScreen = 1;
         userSwitching = 3;
       } else if (mouseX > 0 && mouseX < 265 && mouseY > 160 && mouseY < 240) {
         switchUsersClicked = false;
-        switchUsersScreen = 0;
         userLoggedIn = 0;
         loginScreen = 2;
         userSwitching = 3;
@@ -433,7 +387,6 @@ void mouseClicked() {
   if (menuActive == 2) {
     if (mouseX > 0 && mouseX < 135 && mouseY > 550 && mouseY < height) {
       switchUsersClicked = false;
-      switchUsersScreen = 0;
       userLoggedIn = 0;
       loginScreen = 0;
       userSwitching = 0;
@@ -451,11 +404,12 @@ void keyPressed() {
   if (userLoggedIn == 0) {
     if (key == BACKSPACE) {
       passwordInput = passwordInput.substring(0, max(0, passwordInput.length()-1));
-      if (asterisks.length() <= 17) {
-        asterisks = asterisks.substring(0, max(0, asterisks.length()-1)); // BUG: Stops working if asterisks exceed 18 characters
+      if (passwordInput.length() >= 18) {
+        asterisks = "*******************";
       }
+      asterisks = asterisks.substring(0, max(0, asterisks.length()-1));
     } else if (key == RETURN || key == ENTER) {
-      checkPassword();
+      password.checkPassword();
     } else if (key == ESC) {
       key = 0; // Prevents ESC from quitting program
       loginScreen = 0;
@@ -480,43 +434,6 @@ void keyPressed() {
       returnToMenu();
     }
   }
-}
-
-// Compares user password input with its encrypted equivalent 
-void checkPassword() {
-  if (loginScreen == 1) {
-    if (userLogin[0].comparePassword(passwordInput)) {
-      userLoggedIn = 1;
-      menuActive = 1;
-    } else {
-      incorrectAttempt = true;
-    }
-  } else if (loginScreen == 2) {
-    if (userLogin[1].comparePassword(passwordInput)) {
-      userLoggedIn = 2;
-      menuActive = 1;
-    } else {
-      incorrectAttempt = true;
-    }
-  } else if (loginScreen == 3) {
-    if (userLogin[2].comparePassword(passwordInput)) {
-      userLoggedIn = 3;
-      menuActive = 1;
-    } else {
-      incorrectAttempt = true;
-    }
-  }
-  passwordInput = "";
-  asterisks = "";
-  fieldHint = "Password";
-}
-
-// Resets password variables each time user inputs a password or cancels login operation
-void resetPasswordField() {
-  passwordInput = "";
-  asterisks = "";
-  fieldHint = "Password";
-  incorrectAttempt = false;
 }
 
 // Verifies whether any User A exercise buttons were clicked

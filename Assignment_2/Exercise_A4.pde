@@ -1,6 +1,6 @@
 // Michael Lam
 // March 9, 2018
-// Beautiful, growing, colourful circles.
+// Set A, Exercise 4: Beautiful, growing, colourful circles.
 
 // Last updated May 26, 2018
 // - Canvas size decreased to accomodate Assignment 2

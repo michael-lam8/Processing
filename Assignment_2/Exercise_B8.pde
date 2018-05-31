@@ -1,6 +1,6 @@
 // Michael Lam
 // April 23, 2018
-// Assignment 1: A program containing math equations for user to solve and Pong
+// Set B, Exercise 8 (Assignment 1): A program containing math equations for user to solve and Pong.
 
 // Last updated May 26, 2018
 // - Removed Interfascia library

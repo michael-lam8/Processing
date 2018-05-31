@@ -1,6 +1,6 @@
 // Michael Lam
 // March 13, 2018
-// Colourful circles drawn diagonally.
+// Set A, Exercise 5: Colourful circles drawn diagonally.
 
 // Last updated May 26, 2018
 // - Canvas size decreased to accomodate Assignment 2

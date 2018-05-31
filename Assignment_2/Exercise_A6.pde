@@ -1,6 +1,6 @@
 // Michael Lam
 // March 13, 2018
-// Beautiful circles that follow the mouse.
+// Set A, Exercise 6: Beautiful circles that follow the mouse.
 
 // Last updated May 26, 2018
 // - Canvas size decreased to accomodate Assignment 2
