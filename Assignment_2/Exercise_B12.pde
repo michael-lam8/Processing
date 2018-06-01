@@ -2,12 +2,9 @@
 // May 4, 2018
 // Set B, Exercise 12: This program loads text files and displays a specified characteristics, such as its character count.
 
-// Last updated May 15, 2018
-// - Refactored code in preparation for Assignment 2
-// - Bug fix: program no longer halts at start and displays all characteristics
-// - All text files are now used simultaneously rather than being randomly chosen as per the instructions
-// - Changed function names to match closer with variable names
-// - Corrected spelling mistakes
+// Last updated May 28, 2018
+// - Fixed bug in which for statements looped endlessly
+//    - Created a new boolean (programEnd) which calculates the text characteristics once
 
 class Exercise_B12 {
   // Declaring variables

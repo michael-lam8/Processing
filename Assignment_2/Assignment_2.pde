@@ -3,7 +3,7 @@
 // Assignment 2: A program that contains all Processing exercises and allows selected access using a login system.
 
 // Declaring variables
-Boolean incorrectAttempt = false, switchUsersClicked = false;
+Boolean incorrectAttempt = false, switchUsersClicked = false, exerciseRunning = false, runCodeOnce = true;
 int loginScreen = 0, userLoggedIn = 0, userSwitching = 0, superUserScreen = 1, menuActive = 0, menuBarY = 8, runExercise = 0;
 String passwordInput = "", asterisks = "", fieldHint = "Password";
 
@@ -17,6 +17,7 @@ PFont sfFont;
 PImage userAImg, userBImg, superUserImg, backgroundImg, returnImg, enterImg, dropdownImg, cancelImg;
 
 // Declaring instances
+Buttons clickButton = new Buttons();
 Exercise_A1 exercise1 = new Exercise_A1();
 Exercise_A2 exercise2 = new Exercise_A2();
 Exercise_A3 exercise3 = new Exercise_A3();
@@ -40,42 +41,56 @@ void setup() {
 
 // Login screen
 void draw() {
-  image(backgroundImg, 300, 300, width, height);
-  fill(255);
-  image(userAImg, 125, 250, 125, 125);
-  text("User A", 125, 335);
-  image(userBImg, 300, 250, 125, 125);
-  text("User B", 300, 335);
-  image(superUserImg, 475, 250, 125, 125);
-  text("Super User", 475, 335);
-  if (loginScreen == 1) {
-    userALogin();
-    surface.setTitle("Login to User A");
-  } else if (loginScreen == 2) {
-    userBLogin();
-    surface.setTitle("Login to User B");
-  } else if (loginScreen == 3) {
-    superUserLogin();
-    surface.setTitle("Login to Super User");
-  } else if (loginScreen == 0) {
-    surface.setTitle("Login to...");
-  }
-  if (userLoggedIn == 1) {
-    userAMenu();
-  } else if (userLoggedIn == 2) {
-    userBMenu();
-  } else if (userLoggedIn == 3) {
-    superUserMenu();
+  if (exerciseRunning == false) {
+    image(backgroundImg, 300, 300, width, height);
+    fill(255);
+    image(userAImg, 125, 250, 125, 125);
+    text("User A", 125, 335);
+    image(userBImg, 300, 250, 125, 125);
+    text("User B", 300, 335);
+    image(superUserImg, 475, 250, 125, 125);
+    text("Super User", 475, 335);
+    if (loginScreen == 1) {
+      userALogin();
+      surface.setTitle("Login to User A");
+    } else if (loginScreen == 2) {
+      userBLogin();
+      surface.setTitle("Login to User B");
+    } else if (loginScreen == 3) {
+      superUserLogin();
+      surface.setTitle("Login to Super User");
+    } else if (loginScreen == 0) {
+      surface.setTitle("Login to...");
+    }
+    if (userLoggedIn == 1) {
+      userAMenu();
+    } else if (userLoggedIn == 2) {
+      userBMenu();
+    } else if (userLoggedIn == 3) {
+      superUserMenu();
+    }
   }
   if (runExercise == 1) {
     exercise1.draw();
   } else if (runExercise == 2) {
     exercise2.draw();
   } else if (runExercise == 3) {
+    if (runCodeOnce == true) {
+      background(0);
+      runCodeOnce = false;
+    }
     exercise3.draw();
   } else if (runExercise == 4) {
+    if (runCodeOnce == true) {
+      background(0);
+      runCodeOnce = false;
+    }
     exercise4.draw();
   } else if (runExercise == 5) {
+    if (runCodeOnce == true) {
+      background(0);
+      runCodeOnce = false;
+    }
     exercise5.draw();
   } else if (runExercise == 6) {
     exercise6.draw();
@@ -91,6 +106,7 @@ void draw() {
     exercise12.setup();
   }
   if (runExercise >= 1) {
+    exerciseRunning = true;
     menuActive = 0;
     menuBar();
   }
@@ -218,6 +234,23 @@ void showUserBMenuElements() {
   }
 }
 
+// Displays a panel that allows switching between users
+void switchUsers() {
+  fill(0, 200);
+  rect(300, 300, width, height);
+  fill(38);
+  rect(132.5, 300, 265, height);
+  fill(255);
+  textSize(12);
+  text("Log out", 75, 575);
+  text("Exit", 195, 575);
+  stroke(152);
+  line(10, 80, 256, 80);
+  line(10, 550, 256, 550);
+  textSize(14);
+  stroke(0);
+}
+
 // Displays a bar at top of screen when running an exercise to allow user to quit
 void menuBar() {
   if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < menuBarY) {
@@ -246,6 +279,8 @@ void menuBar() {
 // Resets any attribute or variable that may have been changed when running an exercise
 void returnToMenu() {
   runExercise = 0;
+  exerciseRunning = false;
+  runCodeOnce = true;
   menuActive = 1;
   colorMode(RGB, 255, 255, 255);
   stroke(0);
@@ -253,23 +288,6 @@ void returnToMenu() {
   rectMode(CENTER);
   textAlign(CENTER, CENTER);
   textSize(14);
-}
-
-// Displays a panel that allows switching between users
-void switchUsers() {
-  fill(0, 200);
-  rect(300, 300, width, height);
-  fill(38);
-  rect(132.5, 300, 265, height);
-  fill(255);
-  textSize(12);
-  text("Log out", 75, 575);
-  text("Exit", 195, 575);
-  stroke(152);
-  line(10, 80, 256, 80);
-  line(10, 550, 256, 550);
-  textSize(14);
-  stroke(0);
 }
 
 // Runs following code if mouse is clicked
@@ -306,7 +324,7 @@ void mouseClicked() {
   }
   if (userLoggedIn == 1) {
     if (menuActive == 1) {
-      checkIfSetAClicked();
+      clickButton.checkIfSetAClicked();
       if (mouseX > 0 && mouseX < 265 && mouseY > 0 && mouseY < 70) { // Opens Switch Users panel if user icon/name is clicked
         switchUsersClicked = true;
         menuActive = 2;
@@ -329,7 +347,7 @@ void mouseClicked() {
     }
   } else if (userLoggedIn == 2) {
     if (menuActive == 1) {
-      checkIfSetBClicked();
+      clickButton.checkIfSetBClicked();
       if (mouseX > 0 && mouseX < 265 && mouseY > 0 && mouseY < 70) {
         switchUsersClicked = true;
         menuActive = 2;
@@ -353,12 +371,12 @@ void mouseClicked() {
   } else if (userLoggedIn == 3) {
     if (menuActive == 1) {
       if (superUserScreen == 1) {
-        checkIfSetAClicked();
+        clickButton.checkIfSetAClicked();
         if (mouseX > 544 && mouseX < 544+42 && mouseY > 267 && mouseY < 267+66) {
           superUserScreen = 2;
         }
       } else if (superUserScreen == 2) {
-        checkIfSetBClicked();
+        clickButton.checkIfSetBClicked();
         if (mouseX > 14 && mouseX < 14+42 && mouseY > 267 && mouseY < 267+66) {
           superUserScreen = 1;
         }
@@ -433,39 +451,5 @@ void keyPressed() {
       key = 0; // Prevents ESC from quitting program
       returnToMenu();
     }
-  }
-}
-
-// Verifies whether any User A exercise buttons were clicked
-void checkIfSetAClicked() {
-  if (mouseX > 75 && mouseX < 75+200 && mouseY > 140 && mouseY < 140+60) {
-    runExercise = 1;
-  } else if (mouseX > 320 && mouseX < 320+200 && mouseY > 140 && mouseY < 140+60) {
-    runExercise = 2;
-  } else if (mouseX > 75 && mouseX < 75+200 && mouseY > 235 && mouseY < 235+60) {
-    runExercise = 3;
-  } else if (mouseX > 320 && mouseX < 320+200 && mouseY > 235 && mouseY < 235+60) {
-    runExercise = 4;
-  } else if (mouseX > 75 && mouseX < 75+200 && mouseY > 330 && mouseY < 330+60) {
-    runExercise = 5;
-  } else if (mouseX > 320 && mouseX < 320+200 && mouseY > 330 && mouseY < 330+60) {
-    runExercise = 6;
-  } else if (mouseX > 200 && mouseX < 200+200 && mouseY > 425 && mouseY < 425+60) {
-    runExercise = 7;
-  }
-}
-
-// Verifies whether any User B exercise buttons were clicked
-void checkIfSetBClicked() {
-  if (mouseX > 75 && mouseX < 75+200 && mouseY > 227 && mouseY < 227+60) {
-    exercise8.selectedMode = 0; // Resets to Main Menu each time Exercise 8 is opened
-    runExercise = 8;
-  } else if (mouseX > 320 && mouseX < 320+200 && mouseY > 227 && mouseY < 227+60) {
-    exercise9.resetLines();
-    runExercise = 9;
-  } else if (mouseX > 75 && mouseX < 75+200 && mouseY > 312 && mouseY < 312+60) {
-    runExercise = 10;
-  } else if (mouseX > 320 && mouseX < 320+200 && mouseY > 312 && mouseY < 312+60) {
-    runExercise = 12;
   }
 }

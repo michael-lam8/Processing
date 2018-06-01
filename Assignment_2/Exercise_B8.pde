@@ -2,9 +2,8 @@
 // April 23, 2018
 // Set B, Exercise 8 (Assignment 1): A program containing math equations for user to solve and Pong.
 
-// Last updated May 26, 2018
-// - Removed Interfascia library
-// - Changed "Pong - Multiplayer" to "Pong - Two Players" for clarification
+// Last updated May 28, 2018
+// - Moved mouseClicked() and keyPressed() functions back to this .pde file
 
 class Exercise_B8 {
   // Declaring variables for math

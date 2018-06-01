@@ -2,10 +2,10 @@
 // May 1, 2018
 // Set B, Exercise 9: Randomly creates 50 points and draws it to the nearest wall.
 
-// Last updated May 26, 2018
-// - Lines now draw vertically to the closest wall instead of a random point along the wall
-// - Removed functions to shorten code
-// - Removed for (i < yLines.length) statement as it is identical to that of xLines
+// Last updated May 28, 2018
+// - Fixed a bug in which the lines appeared briefly before disappearing
+//    - Created a new boolean (programEnd) which randomizes each point once
+// - Exercise 9 now redraws when exiting and re-entering
 
 class Exercise_B9 {
   // Declaring variables
@@ -45,8 +45,8 @@ class Exercise_B9 {
     }
   }
   void resetLines() {
-      xLines = new float[0];
-      yLines = new float[0];
-      programEnd = false;
-    }
+    xLines = new float[0];
+    yLines = new float[0];
+    programEnd = false;
+  }
 }
