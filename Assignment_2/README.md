@@ -22,7 +22,7 @@ To log out or switch users, click on the user profile photo or name at the top-l
 The exercises used in this program are its latest version as of June 2nd, 2018, and thus do not reflect the original version. Note that some changes have been made to better incorporate the exercises into the main program.
 
 To view the version used in this program, please see the corresponding exercise .pde file within this folder.  
-To view the latest, revised version, please see the [Refactored Programs](https://github.com/michael-lam8/Processing/tree/master/Refactored%Programs) folder in the root folder of this repository.  
+To view the latest, revised version, please see the [Refactored Programs](https://github.com/michael-lam8/Processing/tree/master/Refactored%20Programs) folder in the root folder of this repository.  
 To view the original version, please see the [Set A Exercises](https://github.com/michael-lam8/Processing/tree/master/Set%20A%20Exercises) or [Set B Exercises](https://github.com/michael-lam8/Processing/tree/master/Set%20B%20Exercises) folder in the root folder of this repository.
 
 ## Preview
