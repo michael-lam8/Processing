@@ -1,4 +1,5 @@
 # Set A Exercises
+Note that the .pde files in this folder are its original version. The latest, refactored version can be found in the [Refactored Programs](https://github.com/michael-lam8/Processing/tree/master/Refactored%Programs) folder in the root folder of this repository.  
 ### Exercise 1
 ![Exercise A1](https://i.imgur.com/49Ejsa5.png)
 ### Exercise 2
