@@ -1,6 +1,6 @@
 // Michael Lam & Vinay Meldrum
 // May 4, 2018
-// This program loads text files and displays a specified characteristics, such as its character count
+// Set B, Exercise 12: This program loads text files and displays a specified characteristics, such as its character count.
 
 // Last updated May 15, 2018
 // - Refactored code in preparation for Assignment 2

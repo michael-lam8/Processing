@@ -1,6 +1,6 @@
 // Michael Lam, Vinay Meldrum
 // May 1, 2018
-// Randomly creates 50 points and draws it to the nearest wall
+// Set B, Exercise 9: Randomly creates 50 points and draws it to the nearest wall.
 
 // Last updated May 26, 2018
 // - Lines now draw vertically to the closest wall instead of a random point along the wall

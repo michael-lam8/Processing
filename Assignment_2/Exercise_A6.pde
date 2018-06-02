@@ -2,20 +2,22 @@
 // March 13, 2018
 // Set A, Exercise 6: Beautiful circles that follow the mouse.
 
-// Last updated May 26, 2018
-// - Canvas size decreased to accomodate Assignment 2
-// - Colours are now more vibrant
-//    - Changed saturation to be constant (255)
-// - Changed renderer to P2D to prevent circle outlines from appearing when mouse moves away
+// Last updated June 2, 2018
+// - Added additional documentation
+// - Updated spacing to make code easier to read
 
 class Exercise_A6 {
+  // Declaring variables
   float x;
   float y;
 
   void draw() {
+    // Setting properties
     background(255);
     noStroke();
     colorMode(HSB);
+    
+    // Draws grid of circles based on mouse coordinates
     x = 0; // Resets x coordinate at each loop.
     while (x < width) {
       x += 16; // Draws circles 20px horizontally apart from each other.

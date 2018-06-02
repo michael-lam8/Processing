@@ -2,22 +2,26 @@
 // May 28, 2018
 // This class creates identical buttons for the exercises when drawn, but allows customization with its coordinates and text.
 
-// Last updated May 31, 2018
-// - Created new empty constructor to allow calling functions within the main .pde
+// Last updated June 2, 2018
+// - Added additional documentation
 
 class Buttons {
+  // Declaring variables
   int x, y;
   String buttonText;
 
+  // Empty constructor to allow calling functions
   Buttons() {
   }
 
+  // Constructor that creates variable exercise buttons
   Buttons(int tempX, int tempY, String tempText) {
     x = tempX;
     y = tempY;
     buttonText = tempText;
   }
 
+  // Draws buttons when called, with variables set when creating the instance
   void draw() {
     fill(255, 110);
     rect(x, y, 200, 60, 12);

@@ -1,11 +1,10 @@
 // Michael Lam & Vinay Meldrum
 // May 4, 2018
 // Set B, Exercise 10 & 11: Program displays characteristics of a sentence, such as its character count.
-// Note: Exercise 10 and 11 are identical in function, except that Exercise 11 requires functions. The following code represents Exercise 11.
+// Note: Exercise 10 and 11 are identical in function, except that Exercise 11 requires functions. The following code represents the requirements Exercise 11.
 
-// Last updated May 28, 2018
-// - Fixed bug in which for statements looped endlessly
-//    - Created a new boolean (programEnd) which calculates the text characteristics once
+// Last updated June 2, 2018
+// - Added additional documentation
 
 class Exercise_B10 {
   // Declaring variables
@@ -20,14 +19,14 @@ class Exercise_B10 {
     background(0);
     textAlign(LEFT);
     textSize(12);
-    if (programEnd == false) {
+    if (programEnd == false) { // Runs once to prevent for statements from looping endlessly
       capitalLetters();
       vowels();
       wordCount();
       punctuation();
       mostUsedLetter();
       programEnd = true;
-    } else {
+    } else { // Displays text characteristics once calculated
       text("Sentence: " + sentence, 50, 150);
       text("Length of the sentence: " + sentence.length() + " characters", 50, 200);
       text("Number of capital letters: " + numberOfCapital, 50, 250);

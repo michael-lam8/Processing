@@ -1,16 +1,15 @@
 // Michael Lam
 // March 13, 2018
-// Beautiful circles that follow the mouse.
+// Set A, Exercise 6: Beautiful circles that follow the mouse.
 
-// Last updated May 26, 2018
-// - Canvas size decreased to accomodate Assignment 2
-// - Colours are now more vibrant
-//    - Changed saturation to be constant (255)
-// - Changed renderer to P2D to prevent circle outlines from appearing when mouse moves away
+// Last updated June 2, 2018
+// - Added additional documentation
 
+// Declaring variables
 float x;
 float y;
 
+// Initial setup
 void setup() {
   size(600, 600, P2D);
   background(255);

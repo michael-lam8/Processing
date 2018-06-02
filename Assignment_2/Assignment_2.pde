@@ -1,5 +1,5 @@
 // Michael Lam
-// June 1st, 2018
+// June 2nd, 2018
 // Assignment 2: A program that contains all Processing exercises and allows selected access using a login system.
 
 // Declaring variables
